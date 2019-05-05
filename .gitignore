@@ -1,0 +1,29 @@
+# Terraform's temp dir
+**/.terraform
+
+# Azure service principal keys
+**/service-principal.*
+*.crt
+*.csr
+*.key
+*.pfx
+
+# Secret variables
+**/secrets.tfvars
+
+# TF State
+**/terraform.tfstate
+**/terraform.tfstate.backup
+
+# Default images_path
+images/
+
+# SSH keys, just in case
+id_rsa
+id_rsa.pub
+
+# Ansible inventory
+inventory
+
+# Ansible playbook retries
+*.retry

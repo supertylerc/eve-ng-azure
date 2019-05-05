@@ -1,0 +1,8 @@
+region = "westus2"
+client_certificate_path = "service-principal.pfx"
+vm_username = "eve"
+vm_size = "Standard_D2s_v3"
+ssh_pubkey = "${file("~/.ssh/id_rsa.pub")}"
+disk_size = "100"
+vm_ip = "10.0.1.10"
+name = "eve"
