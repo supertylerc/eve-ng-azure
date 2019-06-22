@@ -52,6 +52,7 @@
       loop:
         - software-properties-common
         - eve-ng
+        - python-openssl
       register: eve_pkg
     - name: Restart MySQL
       service:
@@ -83,6 +84,48 @@
         modification_time: preserve
         access_time: preserve
       register: configured
+    - name: Enable Apache2 SSL Module
+      apache2_module:
+        name: ssl
+        state: present
+      tags: tls
+    - name: Ensure SSL Directories Exist
+      file:
+        path: "{{ item }}"
+        state: directory
+      loop:
+        - /etc/ssl/private
+        - /etc/ssl/certs
+      tags: tls
+    - name: Generate an OpenSSL Private Key
+      openssl_privatekey:
+        path: /etc/ssl/private/apache-selfsigned.pem
+      tags: tls
+    - name: Generate an OpenSSL CSR
+      openssl_csr:
+        path: /etc/ssl/private/apache-selfsigned.csr
+        privatekey_path: /etc/ssl/private/apache-selfsigned.pem
+        common_name: "{{ inventory_hostname }}"
+      tags: tls
+    - name: Generate a Self-Signed Certificate
+      openssl_certificate:
+        path: /etc/ssl/certs/apache-selfsigned.crt
+        privatekey_path: /etc/ssl/private/apache-selfsigned.pem
+        csr_path: /etc/ssl/private/apache-selfsigned.csr
+        provider: selfsigned
+      tags: tls
+    - name: Create Apache SSL Virtual Server
+      template:
+        src: etc/apache2/sites-enabled/default-ssl.conf
+        dest: /etc/apache2/sites-enabled/default-ssl.conf
+      register: ssl_vs
+      tags: tls
+    - name: Restart Apache
+      service:
+        name: apache2
+        state: restarted
+      when: ssl_vs.changed
+      tags: tls
     - name: Reboot
       reboot:
       when: configured.changed
