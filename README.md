@@ -157,16 +157,14 @@ is not committed to the git repository.
 # Usage
 
 The instructions below will get you a running EVE-NG instance.  You can access
-it at `http://$name.$region.cloudapp.azure.com`.  By default, this is
-`http://eve.westus2.cloudapp.azure.com`.  Note that this is not encrypted, so
-whatever credentials you use to log into the web UI will be sent in clear-text,
-as will all other packets sent and received.  The default credentials of
+it at `https://$name.$region.cloudapp.azure.com`.  By default, this is
+`https://eve.westus2.cloudapp.azure.com`.  The default credentials of
 `admin/eve` can be used, and it is strongly recommended that you change these
 after you log in for the first time.
 
-> I'd love to have an improvement that sets EVE-NG up to use TLS by default,
-> but I currently don't have the cycles for that.  A pull request to implement
-> that using Ansible would be gladly accepted.
+> The service is still available over HTTP and currently does not redirect to
+> HTTPS.  A pull request to implement redirection is welcome, but for now,
+> make sure you're visiting `https://` and _not_ `http://`.
 
 I don't personally utilize the `click to telnet` feature of the native console,
 so the Network Security Group rules do not allow this functionality.  In order
