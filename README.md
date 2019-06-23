@@ -164,7 +164,8 @@ after you log in for the first time.
 
 > The service is still available over HTTP and currently does not redirect to
 > HTTPS.  A pull request to implement redirection is welcome, but for now,
-> make sure you're visiting `https://` and _not_ `http://`.
+> make sure you're visiting `https://` and _not_ `http://`.  In addition, the
+> Network Security Group is configured to drop traffic to port 80.
 
 I don't personally utilize the `click to telnet` feature of the native console,
 so the Network Security Group rules do not allow this functionality.  In order
