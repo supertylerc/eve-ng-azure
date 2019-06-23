@@ -91,17 +91,6 @@ resource "azurerm_network_security_group" "eve_nsg" {
         destination_address_prefix = "${var.vm_ip}"
     }
     security_rule {
-        name                       = "HTTP"
-        priority                   = 501
-        direction                  = "Inbound"
-        access                     = "Allow"
-        protocol                   = "Tcp"
-        source_port_range          = "*"
-        destination_port_range     = "80"
-        source_address_prefix      = "${data.http.my_public_ip.body}"
-        destination_address_prefix = "${var.vm_ip}"
-    }
-    security_rule {
         name                       = "HTTPS"
         priority                   = 500
         direction                  = "Inbound"
