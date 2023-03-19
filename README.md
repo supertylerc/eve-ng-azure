@@ -1,3 +1,10 @@
+# UNMAINTAINED
+
+This repo is being archived.  I haven't used EVE-NG in a public cloud in a
+(very) long time.  Terraform things have probably changed.  Azure has likely
+changed.  EVE-NG has definitely changed.  This in this repo may still work
+or at least serve as inspiration.
+
 # eve-ng-azure
 
 This repository uses [Terraform](https://terraform.io) to manage an Azure
